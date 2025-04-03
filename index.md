@@ -17,7 +17,7 @@ This API streamlines data intake and gives you real-time insights into job progr
 
 ## Navigation
 
-- [Authentication](authentication.html) — Learn how to generate your access token.
+- [Authentication](authentication.md) — Learn how to generate your access token.
 - [Jobs](jobs.html) — Submit projects, submit jobs, and view job details.
 - [Invoices](invoices.html) — View invoice data and associated information.
 
@@ -27,4 +27,4 @@ This API streamlines data intake and gives you real-time insights into job progr
 
 Use this API to integrate your systems with our BMS. Whether you're automating job submissions or tracking invoices, our API ensures you stay connected with BarunCorp’s internal operations.
 
-For support, please email [support@baruncorp.com](mailto:support@baruncorp.com).
+For support, please email [tylery@baruncorp.com](mailto:tylery@baruncorp.com).
