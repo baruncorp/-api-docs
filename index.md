@@ -36,7 +36,7 @@ To create a job using the API, follow this typical workflow:
 
 1. **Check if a project exists for the given address**
    - Use the [Projects endpoint](projects.md) to query by address or project attributes.
-   - If a project exists, retrieve its `project_id`.
+   - If a project exists, retrieve its `project_id` and `organization_id`.
 
 2. **Create a new project (if needed)**
    - If no existing project matches, use the Projects endpoint to submit a new one.
