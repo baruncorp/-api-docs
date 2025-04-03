@@ -5,15 +5,79 @@ title: Projects
 
 # Projects
 
-The Projects endpoint allows you to search for projects within the BarunCorp BMS system. You can filter projects by address, property type, and property owner using query parameters.
+The Projects endpoint allows you to search for and create projects within the BarunCorp BMS system.
 
-## Endpoint
+---
+
+## GET /projects s 
 
 ```
 GET https://api-public.baruncorp.com/prod/projects
 ```
 
-## Create a Project
+### Query Parameters
+
+- **propertyFullAddress** (optional)  
+  A full or partial address to filter projects by property location.
+
+- **propertyType** (optional)  
+  Filter projects by property type. Accepted values: `Residential` or `Commercial`.
+
+- **projectPropertyOwner** (optional)  
+  A full or partial name to filter projects by the property owner's name.
+
+### Example Request
+
+```
+GET https://api-public.baruncorp.com/prod/projects?propertyFullAddress=Main%20Street&propertyType=Residential&projectPropertyOwner=Smith
+```
+
+### Example Response
+
+```json
+{
+  "totalCount": 2,
+  "pageSize": 20,
+  "page": 1,
+  "totalPage": 1,
+  "items": [
+    {
+      "projectId": "123e4567-e89b-12d3-a456-426614174000",
+      "organizationId": "org-001",
+      "organizationName": "Sample Organization",
+      "propertyOwnerName": "John Doe",
+      "propertyType": "Residential",
+      "projectFolderLink": null,
+      "projectNumber": "PRJ-001",
+      "propertyFullAddress": "123 Main St, Anytown, USA",
+      "createdAt": "2025-01-01T12:00:00.000Z",
+      "totalOfJobs": 2,
+      "masterLogUpload": false,
+      "designOrPEStampPreviouslyDoneOnProjectOutSide": false,
+      "mountingType": "Ground Mount"
+    },
+    {
+      "projectId": "223e4567-e89b-12d3-a456-426614174001",
+      "organizationId": "org-002",
+      "organizationName": "Another Org",
+      "propertyOwnerName": "Jane Smith",
+      "propertyType": "Commercial",
+      "projectFolderLink": null,
+      "projectNumber": "PRJ-002",
+      "propertyFullAddress": "456 Elm St, Othertown, USA",
+      "createdAt": "2025-02-15T08:30:00.000Z",
+      "totalOfJobs": 1,
+      "masterLogUpload": false,
+      "designOrPEStampPreviouslyDoneOnProjectOutSide": true,
+      "mountingType": "Roof Mount"
+    }
+  ]
+}
+```
+
+---
+
+## POST /projects
 
 ```
 POST https://api-public.baruncorp.com/prod/projects
@@ -60,78 +124,20 @@ POST https://api-public.baruncorp.com/prod/projects
 }
 ```
 
-## Query Parameters
-
-- **propertyFullAddress** (optional)  
-  A full or partial address to filter projects by property location.
-
-- **propertyType** (optional)  
-  Filter projects by property type. Accepted values: `Residential` or `Commercial`.
-
-- **projectPropertyOwner** (optional)  
-  A full or partial name to filter projects by the property owner's name.
-
-## Example Request
-
-```
-GET https://api-public.baruncorp.com/prod/projects?propertyFullAddress=Main%20Street&propertyType=Residential&projectPropertyOwner=Smith
-```
-
-## Example Response
-
-```json
-{
-  "totalCount": 2,
-  "pageSize": 20,
-  "page": 1,
-  "totalPage": 1,
-  "items": [
-    {
-      "projectId": "123e4567-e89b-12d3-a456-426614174000",
-      "organizationId": "org-001",
-      "organizationName": "Sample Organization",
-      "propertyOwnerName": "John Doe",
-      "propertyType": "Residential",
-      "projectFolderLink": null,
-      "projectNumber": "PRJ-001",
-      "propertyFullAddress": "123 Main St, Anytown, USA",
-      "createdAt": "2025-01-01T12:00:00.000Z",
-      "totalOfJobs": 2,
-      "masterLogUpload": false,
-      "designOrPEStampPreviouslyDoneOnProjectOutSide": false,
-      "mountingType": "Ground Mount"
-    },
-    {
-      "projectId": "223e4567-e89b-12d3-a456-426614174001",
-      "organizationId": "org-002",
-      "organizationName": "Another Org",
-      "propertyOwnerName": "Jane Smith",
-      "propertyType": "Commercial",
-      "projectFolderLink": null,
-      "projectNumber": "PRJ-002",
-      "propertyFullAddress": "456 Elm St, Othertown, USA",
-      "createdAt": "2025-02-15T08:30:00.000Z",
-      "totalOfJobs": 1,
-      "masterLogUpload": false,
-      "designOrPEStampPreviouslyDoneOnProjectOutSide": true,
-      "mountingType": "Roof Mount"
-    }
-  ]
-}
-```
+---
 
 ## Notes
 
-- **Pagination:**  
-  The response includes fields like `totalCount`, `pageSize`, `page`, and `totalPage` to help you navigate large datasets.
+### Pagination  
+The GET response includes fields like `totalCount`, `pageSize`, `page`, and `totalPage` to help you navigate large datasets.
 
-- **Usage of `projectId`:**  
-  The `projectId` returned for each project is crucial when creating a job. Ensure you capture this ID to reference the project in subsequent job submissions.
+### projectId  
+The `projectId` is required when creating a job. Capture it from either a new project creation or query results.
 
-  - **Usage of `organizationId`:**  
-  The `organizationId` returned for each project is crucial when creating a job. Ensure you capture this ID to reference the organization in subsequent job submissions.
+### organizationId  
+This is also required when submitting a job tied to the project’s organization.
 
-- **Filtering:**  
-  All query parameters are optional. If no parameters are specified, the endpoint returns all projects accessible to your account. Filtering is case-insensitive.
+### Filtering  
+All query parameters are optional. If none are specified, the GET endpoint returns all projects accessible to your account. Filtering is case-insensitive.
 
-For further questions or support, please reach out to [tylery@baruncorp.com](mailto:tylery@baruncorp.com).
+For further support, contact [tylery@baruncorp.com](mailto:tylery@baruncorp.com).
